@@ -8,7 +8,7 @@ from selenium.webdriver.support import expected_conditions as EC
 # ---- Credentials from environment variables ----
 NAUKRI_EMAIL = os.getenv("NAUKRI_EMAIL")
 NAUKRI_PASSWORD = os.getenv("NAUKRI_PASSWORD")
-RESUME_PATH = os.getenv("RESUME_PATH", "resume.pdf")  # defaults to repo root
+RESUME_PATH = os.getenv("RESUME_PATH", "vineeth_DevSecOps.pdf")  # defaults to repo root
 
 if not (NAUKRI_EMAIL and NAUKRI_PASSWORD):
     raise ValueError("❌ Missing NAUKRI_EMAIL or NAUKRI_PASSWORD in environment")
