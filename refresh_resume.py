@@ -6,16 +6,16 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 # ---- Credentials from environment variables ----
-printf("Starting refresh_resume.py")
+print("Starting refresh_resume.py")
 NAUKRI_EMAIL = os.getenv("NAUKRI_EMAIL")
 NAUKRI_PASSWORD = os.getenv("NAUKRI_PASSWORD")
 RESUME_PATH = os.getenv("RESUME_PATH", "vineeth_DevSecOps.pdf")  # defaults to repo root
-printf("Collected email, password, and pdf file")
+print("Collected email, password, and pdf file")
 if not (NAUKRI_EMAIL and NAUKRI_PASSWORD):
     raise ValueError("❌ Missing NAUKRI_EMAIL or NAUKRI_PASSWORD in environment")
 
 def refresh_resume():
-    printf("Inside refresh_resume funct")
+    print("Inside refresh_resume funct")
     options = webdriver.ChromeOptions()
     options.add_argument("--headless=new")
     options.add_argument("--no-sandbox")
@@ -40,13 +40,13 @@ def refresh_resume():
         login_btn.click()
 
         time.sleep(5)  # let login settle
-        printf("Login success")
+        print("Login success")
         # Step 2: Go to profile
         driver.get("https://www.naukri.com/mnjuser/profile")
-        printf("Reached Profile")
+        print("Reached Profile")
 
         # Step 3: Upload resume
-        printf("Trying to upload resume")
+        print("Trying to upload resume")
         upload = wait.until(EC.presence_of_element_located((By.XPATH, "//input[@type='file']")))
         upload.send_keys(os.path.abspath(RESUME_PATH))
 
