@@ -33,6 +33,11 @@ jobs:
           unzip chromedriver_linux64.zip
           sudo mv chromedriver /usr/local/bin/
 
+      - name: Debug – Show current directory
+        run: |
+          pwd
+          ls -R
+
       - name: Run script
         env:
           NAUKRI_EMAIL: ${{ secrets.NAUKRI_EMAIL }}
