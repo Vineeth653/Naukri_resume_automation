@@ -26,24 +26,28 @@ jobs:
       - name: Install Chrome & ChromeDriver
         run: |
           sudo apt-get update
-          sudo apt-get install -y wget unzip xvfb curl
-          
+          sudo apt-get install -y wget unzip curl xvfb
+
           # Install latest stable Google Chrome
           wget -q https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
           sudo apt-get install -y ./google-chrome-stable_current_amd64.deb
-          
+
           # Detect Chrome major version
           CHROME_VERSION=$(google-chrome --version | grep -oP '\d+' | head -1)
           echo "Installed Chrome version: $CHROME_VERSION"
 
-          # Fetch matching ChromeDriver version
-          DRIVER_VERSION=$(curl -sS https://chromedriver.storage.googleapis.com/LATEST_RELEASE_${CHROME_VERSION})
-          echo "Matching ChromeDriver version: $DRIVER_VERSION"
+          # Fetch matching ChromeDriver version using Chrome for Testing JSON
+          DRIVER_VERSION=$(curl -s https://googlechromelabs.github.io/chrome-for-testing/last-known-good-versions.json \
+            | jq -r ".channels.Stable.version")
+          echo "Latest stable Chrome/Driver version: $DRIVER_VERSION"
 
-          wget -q "https://chromedriver.storage.googleapis.com/${DRIVER_VERSION}/chromedriver_linux64.zip"
-          unzip chromedriver_linux64.zip
-          sudo mv chromedriver /usr/local/bin/chromedriver
+          # Download ChromeDriver
+          DRIVER_MAJOR=$(echo $DRIVER_VERSION | cut -d. -f1)
+          wget -q "https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/$DRIVER_VERSION/linux64/chromedriver-linux64.zip"
+          unzip chromedriver-linux64.zip
+          sudo mv chromedriver-linux64/chromedriver /usr/local/bin/
           sudo chmod +x /usr/local/bin/chromedriver
+
 
 
       - name: Debug – Show current directory
