@@ -43,4 +43,5 @@ jobs:
           NAUKRI_EMAIL: ${{ secrets.NAUKRI_EMAIL }}
           NAUKRI_PASSWORD: ${{ secrets.NAUKRI_PASSWORD }}
         run: |
+          ls -R   # debug: list files so we’re sure where we are
           xvfb-run -a python refresh_resume.py
