@@ -6,14 +6,16 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 # ---- Credentials from environment variables ----
+printf("Starting refresh_resume.py")
 NAUKRI_EMAIL = os.getenv("NAUKRI_EMAIL")
 NAUKRI_PASSWORD = os.getenv("NAUKRI_PASSWORD")
 RESUME_PATH = os.getenv("RESUME_PATH", "vineeth_DevSecOps.pdf")  # defaults to repo root
-
+printf("Collected email, password, and pdf file")
 if not (NAUKRI_EMAIL and NAUKRI_PASSWORD):
     raise ValueError("❌ Missing NAUKRI_EMAIL or NAUKRI_PASSWORD in environment")
 
 def refresh_resume():
+    printf("Inside refresh_resume funct")
     options = webdriver.ChromeOptions()
     options.add_argument("--headless=new")
     options.add_argument("--no-sandbox")
