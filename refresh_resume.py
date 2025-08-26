@@ -38,11 +38,13 @@ def refresh_resume():
         login_btn.click()
 
         time.sleep(5)  # let login settle
-
+        printf("Login success")
         # Step 2: Go to profile
         driver.get("https://www.naukri.com/mnjuser/profile")
+        printf("Reached Profile")
 
         # Step 3: Upload resume
+        printf("Trying to upload resume")
         upload = wait.until(EC.presence_of_element_located((By.XPATH, "//input[@type='file']")))
         upload.send_keys(os.path.abspath(RESUME_PATH))
 
