@@ -38,4 +38,4 @@ jobs:
           NAUKRI_EMAIL: ${{ secrets.NAUKRI_EMAIL }}
           NAUKRI_PASSWORD: ${{ secrets.NAUKRI_PASSWORD }}
         run: |
-          xvfb-run -a python naukri_refresh.py
+          xvfb-run -a python refresh_resume.py
